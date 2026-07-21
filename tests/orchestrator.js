@@ -12,7 +12,9 @@ async function waitForAllServices() {
     async function fetchStatusPage() {
       const response = await fetch('http://localhost:3000/api/v1/status');
 
-      await response.json();
+      if (!response.ok) {
+        throw new Error(`Failed to fetch status: ${response.status}`);
+      }
     }
   }
 }
